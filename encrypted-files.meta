@@ -1,8 +1,8 @@
 ((egg "encrypted-files.egg")
  (license "GPL-3")
  (category data)
- (needs posix utils extras stty)
- (test-depends test files)
+ (needs stty)
+ (test-depends test)
  (author "Peter Danenberg")
  (synopsis "Interacting with encrypted files over openssl")
  (files "encrypted-files.scm"
