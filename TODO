@@ -3,6 +3,9 @@
 * TODO expand openssl egg to include envelopes
 * TODO implement as ffi calls instead of process calls
 * TODO support ciphers besides base64-encoded aes-256-cbc
-* TODO running tests doesn't work in emacs
+* DONE running tests doesn't work in emacs
+  CLOSED: [2010-01-24 Sun 11:35]
+  - CLOSING NOTE [2010-01-24 Sun 11:35] \\
+    have to run them in a non-tty mode
   looks like stdin gets curtailed, and openssl segfaults on a blank
   password; this doesn't always happen.
