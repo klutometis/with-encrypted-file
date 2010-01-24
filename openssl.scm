@@ -1,6 +1,12 @@
-(define (read-password prompt)
-  (display prompt)
-  (with-stty '(not echo) read-line))
+(define read-password
+  (case-lambda
+   (() (read-password #t))
+   ((tty) (read-password tty "Password: "))
+   ((tty prompt)
+    (if tty
+        (begin (display prompt)
+               (with-stty '(not echo) read-line))
+        (read-line)))))
 
 (define with-output-to-encrypted-file
   (case-lambda
@@ -10,11 +16,7 @@
     (let ((sometime-output-port (current-output-port)))
       (dynamic-wind
           (lambda ()
-            (let*-values (((password) (if tty
-                                          ;; seems to have problems on
-                                          ;; non-ttys
-                                          (read-password "Password: ")
-                                          (read-line)))
+            (let*-values (((password) (read-password tty))
                           ((in out id)
                            (process "openssl"
                                     `("enc"
@@ -42,9 +44,7 @@
     (let ((sometime-input-port (current-input-port)))
       (dynamic-wind
           (lambda ()
-            (let*-values (((password) (if tty
-                                          (read-password "Password: ")
-                                          (read-line)))
+            (let*-values (((password) (read-password tty))
                           ((in out id)
                            (process "openssl"
                                     `("enc"
