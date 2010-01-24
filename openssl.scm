@@ -29,7 +29,6 @@
                                       ,file
                                       "-pass"
                                       ,(format "pass:~A" password)))))
-              #;
               (close-input-port in)
               (current-output-port out)))
           thunk
@@ -56,7 +55,6 @@
                                       ,file
                                       "-pass"
                                       ,(format "pass:~A" password)))))
-              #;
               (close-output-port out)
               (current-input-port in)))
           thunk
