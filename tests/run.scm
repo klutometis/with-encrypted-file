@@ -4,23 +4,17 @@
       (plaintext "harro")
       (ciphertext (create-temporary-file))
       (tty #f))
-  (with-input-from-string
-      password
-    (lambda ()
-      (with-output-to-encrypted-file
-          ciphertext
-        (lambda ()
-          (display plaintext))
-        tty)))
+  (with-output-to-encrypted-file/password
+   ciphertext
+   (lambda ()
+     (display plaintext))
+   password)
 
-  (with-input-from-string
-      password
-    (lambda ()
-      (with-input-from-encrypted-file
-          ciphertext
-        (lambda ()
-          (test
-           "retrieve cipher from encrypted file"
-           plaintext
-           (read-all)))
-        tty))))
+  (with-input-from-encrypted-file/password
+   ciphertext
+   (lambda ()
+     (test
+      "retrieve cipher from encrypted file"
+      plaintext
+      (read-all)))
+   password))

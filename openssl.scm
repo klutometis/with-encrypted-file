@@ -61,3 +61,30 @@
           (lambda ()
             (close-input-port (current-input-port))
             (current-input-port sometime-input-port)))))))
+
+(define (with-output-to-encrypted-file/password file thunk password)
+  (with-input-from-string
+      password
+    (lambda ()
+      (with-output-to-encrypted-file file thunk #f))))
+
+(define (with-input-from-encrypted-file/password file thunk password)
+  (with-input-from-string
+      password
+    (lambda ()
+      (with-input-from-encrypted-file file thunk #f))))
+
+(define (with-cached-password/tty tty . lambdas)
+  (let ((password (read-password tty)))
+    (let loop ((lambdas lambdas))
+      (if (pair? lambdas)
+          (let ((lambda (car lambdas)))
+            (lambda password))))))
+
+(define (with-cached-password . lambdas)
+  (apply with-cached-password/tty (cons #t lambdas)))
+
+(define (with-cached-password/password password . lambdas)
+  (with-input-from-string
+      password
+    (apply with-cached-password/tty (cons #f lambdas))))

@@ -1,4 +1,43 @@
 # -*- mode: org; -*-
+* TODO =with-cached-password=, =with-cached-password/password=
+  takes: tty, lambdas; second form: password. unless i take a list of
+  lambdas, though, not sure how to avoid requiring tty, unless i do
+  some type checking on the first parameter. can just silently truth
+  check the first parameter like lset-union, et al. do? lazy, but
+  precedented. no, no. some kind of internal function that takes tty;
+  outerly distinguishes between =...-{,password}=.
+
+  how do dots behave when passed around?
+
+  #+BEGIN_SRC scheme
+    (use test)
+    
+    (define (a . xs)
+      xs)
+    
+    (define (b . xs)
+      (a xs))
+    
+    (define (c . xs)
+      (apply a xs))
+    
+    (test
+     "canonical"
+     '(1 2 3)
+     (a 1 2 3))
+    (test
+     "passed from . to ."
+     '((1 2 3))
+     (b 1 2 3))
+    (test
+     "applied from ."
+     '(1 2 3)
+     (c 1 2 3))
+    (test
+     "call-with-values"
+     '(1 2 3)
+     (call-with-values (lambda () (values 1 2 3)) a))
+  #+END_SRC
 * TODO port openssl work from pass egg
 * TODO expand openssl egg to include envelopes
 * TODO implement as ffi calls instead of process calls
