@@ -1,5 +1,18 @@
 # -*- mode: org; -*-
-* TODO =with-cached-password=, =with-cached-password/password=
+* TODO port openssl work from pass egg
+* TODO expand openssl egg to include envelopes
+* TODO implement as ffi calls instead of process calls
+* TODO support ciphers besides base64-encoded aes-256-cbc
+* DONE running tests doesn't work in emacs
+  CLOSED: [2010-01-24 Sun 11:35]
+  - CLOSING NOTE [2010-01-24 Sun 11:35] \\
+    have to run them in a non-tty mode
+  looks like stdin gets curtailed, and openssl segfaults on a blank
+  password; this doesn't always happen.
+* CANCELED =with-cached-password=, =with-cached-password/password=
+  CLOSED: [2010-01-24 Sun 15:26]
+  - CLOSING NOTE [2010-01-24 Sun 15:27] \\
+    don't need this, given */password forms
   takes: tty, lambdas; second form: password. unless i take a list of
   lambdas, though, not sure how to avoid requiring tty, unless i do
   some type checking on the first parameter. can just silently truth
@@ -38,13 +51,3 @@
      '(1 2 3)
      (call-with-values (lambda () (values 1 2 3)) a))
   #+END_SRC
-* TODO port openssl work from pass egg
-* TODO expand openssl egg to include envelopes
-* TODO implement as ffi calls instead of process calls
-* TODO support ciphers besides base64-encoded aes-256-cbc
-* DONE running tests doesn't work in emacs
-  CLOSED: [2010-01-24 Sun 11:35]
-  - CLOSING NOTE [2010-01-24 Sun 11:35] \\
-    have to run them in a non-tty mode
-  looks like stdin gets curtailed, and openssl segfaults on a blank
-  password; this doesn't always happen.
