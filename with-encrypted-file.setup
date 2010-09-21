@@ -1,0 +1,6 @@
+;;; -*- Hen -*-
+(include "setup-helper")
+(verify-extension-name "with-encrypted-file")
+(setup-shared-extension-module
+ 'with-encrypted-file
+ (extension-version 0.1))

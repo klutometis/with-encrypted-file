@@ -1,0 +1,10 @@
+((egg "with-encrypted-file.egg")
+ (license "GPL-3")
+ (category data)
+ (needs stty setup-helper)
+ (test-depends test)
+ (author "Peter Danenberg")
+ (synopsis "Interacting with encrypted files over openssl")
+ (files "with-encrypted-file.scm"
+        "with-encrypted-file.setup"
+        "tests/run.scm"))
