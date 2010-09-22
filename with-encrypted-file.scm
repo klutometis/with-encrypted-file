@@ -16,7 +16,7 @@
     ((tty) (read-password tty "Password: "))
     ((tty prompt)
      (if tty
-         (begin (display prompt)
+         (begin (display prompt (current-error-port))
                 (with-stty '(not echo) read-line))
          (read-line)))))
 
