@@ -15,11 +15,13 @@
     (() (read-password #t))
     ((tty) (read-password tty "Password: "))
     ((tty prompt)
-     (if tty
-         (begin (display prompt)
-                (with-stty '(not echo) read-line))
-         (read-line))
-     (newline))))
+     (let ((password
+            (if tty
+                (begin (display prompt)
+                       (with-stty '(not echo) read-line))
+                (read-line))))
+       (newline)
+       password))))
 
  (define with-output-to-encrypted-file
    (case-lambda
