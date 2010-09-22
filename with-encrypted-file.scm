@@ -1,6 +1,7 @@
 (module
  with-encrypted-file
- (with-output-to-encrypted-file
+ (read-password
+  with-output-to-encrypted-file
   with-output-to-encrypted-file/password
   with-input-from-encrypted-file
   with-input-from-encrypted-file/password)
@@ -17,7 +18,8 @@
      (if tty
          (begin (display prompt)
                 (with-stty '(not echo) read-line))
-         (read-line)))))
+         (read-line))
+     (newline))))
 
  (define with-output-to-encrypted-file
    (case-lambda
