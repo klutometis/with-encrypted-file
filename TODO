@@ -1,4 +1,5 @@
 # -*- mode: org; -*-
+* TODO GPG
 * TODO port openssl work from pass egg
 * TODO expand openssl egg to include envelopes
 * TODO implement as ffi calls instead of process calls
