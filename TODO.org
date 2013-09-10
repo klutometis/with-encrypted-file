@@ -1,5 +1,9 @@
 # -*- mode: org; -*-
+<<<<<<< Updated upstream:TODO
 * TODO GPG
+=======
+* TODO Move to [[http://www.tarsnap.com/scrypt.html][scrypt]].
+>>>>>>> Stashed changes:TODO.org
 * TODO port openssl work from pass egg
 * TODO expand openssl egg to include envelopes
 * TODO implement as ffi calls instead of process calls
